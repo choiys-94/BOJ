@@ -1,10 +1,10 @@
-package algorithm;
+package boj;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class BOJ_11559_PuyoPuyo {
+public class _BOJ_11559_PuyoPuyo {
 	//상, 좌, 우
 	static int[] dx = {1, 0,  0};
 	static int[] dy = {0, 1, -1};
