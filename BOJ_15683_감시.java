@@ -3,7 +3,7 @@ package boj;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class _BOJ_15683_감시 {
+public class BOJ_15683_감시 {
 	static class Coord{
 		int x;
 		int y;
@@ -58,7 +58,9 @@ public class _BOJ_15683_감시 {
 			}
 			
 			int tLeft = left;
-			
+			for(Coord c: order) {
+				visited[c.x][c.y] = true; 
+			}
 			for(Coord c: order) {
 				switch(c.type) {
 				case 1:
@@ -86,47 +88,48 @@ public class _BOJ_15683_감시 {
 			return;
 		}
 
-		Coord tv = tvs.get(idx);
-		switch(tv.type) {
-		case 1:
-			for(int j=0; j<4; j++) {
-				int nx = tv.x + dx1[j];
-				int ny = tv.y + dy1[j];
-				if(check(nx, ny) && map[nx][ny] != 0)
-					continue;
-				order.add(new Coord(tv.x, tv.y, tv.type, j));
+		if(!tvs.isEmpty()) {
+			Coord tv = tvs.get(idx);
+			switch(tv.type) {
+			case 1:
+				for(int j=0; j<4; j++) {
+					int nx = tv.x + dx1[j];
+					int ny = tv.y + dy1[j];
+					if(check(nx, ny) && map[nx][ny] == 6)
+						continue;
+					order.add(new Coord(tv.x, tv.y, tv.type, j));
+					solve(map, idx+1);
+					order.remove(order.size()-1);
+				}
+				break;
+			case 2:
+				for(int j=0; j<2; j++) {
+					order.add(new Coord(tv.x, tv.y, tv.type, j));
+					solve(map, idx+1);
+					order.remove(order.size()-1);
+				}
+				break;
+			case 3:
+				for(int j=0; j<4; j++) {
+					order.add(new Coord(tv.x, tv.y, tv.type, j));
+					solve(map, idx+1);
+					order.remove(order.size()-1);
+				}
+				break;
+			case 4:
+				for(int j=0; j<4; j++) {
+					order.add(new Coord(tv.x, tv.y, tv.type, j));
+					solve(map, idx+1);
+					order.remove(order.size()-1);
+				}
+				break;
+			case 5:
+				order.add(new Coord(tv.x, tv.y, tv.type, 0));
 				solve(map, idx+1);
 				order.remove(order.size()-1);
+				break;
 			}
-			break;
-		case 2:
-			for(int j=0; j<2; j++) {
-				order.add(new Coord(tv.x, tv.y, tv.type, j));
-				solve(map, idx+1);
-				order.remove(order.size()-1);
-			}
-			break;
-		case 3:
-			for(int j=0; j<4; j++) {
-				order.add(new Coord(tv.x, tv.y, tv.type, j));
-				solve(map, idx+1);
-				order.remove(order.size()-1);
-			}
-			break;
-		case 4:
-			for(int j=0; j<4; j++) {
-				order.add(new Coord(tv.x, tv.y, tv.type, j));
-				solve(map, idx+1);
-				order.remove(order.size()-1);
-			}
-			break;
-		case 5:
-			order.add(new Coord(tv.x, tv.y, tv.type, 0));
-			solve(map, idx+1);
-			order.remove(order.size()-1);
-			break;
 		}
-		
 	}
 	
 	// 우 하 좌 상
@@ -153,7 +156,7 @@ public class _BOJ_15683_감시 {
 		while(true) {
 			nx += dx1[dir];
 			ny += dy1[dir];
-			if(check(nx, ny) && map[nx][ny] == 0) {
+			if(check(nx, ny) && map[nx][ny] != 6) {
 				if(visited[nx][ny] == false) {
 					left--;
 					visited[nx][ny] = true;
@@ -173,7 +176,7 @@ public class _BOJ_15683_감시 {
 			while(true) {
 				nx += dx2[i];
 				ny += dy2[i];
-				if(check(nx, ny) && map[nx][ny] == 0) {
+				if(check(nx, ny) && map[nx][ny] != 6) {
 					if(visited[nx][ny] == false) {
 						left--;
 						visited[nx][ny] = true;
@@ -193,7 +196,7 @@ public class _BOJ_15683_감시 {
 			while(true) {
 				nx += dx3[i];
 				ny += dy3[i];
-				if(check(nx, ny) && map[nx][ny] == 0) {
+				if(check(nx, ny) && map[nx][ny] != 6) {
 					if(visited[nx][ny] == false) {
 						left--;
 						visited[nx][ny] = true;
@@ -213,7 +216,7 @@ public class _BOJ_15683_감시 {
 			while(true) {
 				nx += dx4[i];
 				ny += dy4[i];
-				if(check(nx, ny) && map[nx][ny] == 0) {
+				if(check(nx, ny) && map[nx][ny] != 6) {
 					if(visited[nx][ny] == false) {
 						left--;
 						visited[nx][ny] = true;
@@ -233,7 +236,7 @@ public class _BOJ_15683_감시 {
 			while(true) {
 				nx += dx1[i];
 				ny += dy1[i];
-				if(check(nx, ny) && map[nx][ny] == 0) {
+				if(check(nx, ny) && map[nx][ny] != 6) {
 					if(visited[nx][ny] == false) {
 						left--;
 						visited[nx][ny] = true;
