@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.StringTokenizer;
 
-public class _BOJ_17143_낚시왕2 {
+public class BOJ_17143_낚시왕2 {
 	static class Shark implements Comparable<Shark>{
 		int r;
 		int c;
@@ -51,6 +51,12 @@ public class _BOJ_17143_낚시왕2 {
 			int c = Integer.parseInt(st.nextToken());
 			int s = Integer.parseInt(st.nextToken());
 			int d = Integer.parseInt(st.nextToken());
+			if(d <= 2) {
+				s %= (R-1)*2;
+			}
+			else {
+				s %= (C-1)*2;
+			}
 			int z = Integer.parseInt(st.nextToken());
 			shark.add(new Shark(r, c, s, d, z));
 		}
@@ -85,9 +91,7 @@ public class _BOJ_17143_낚시왕2 {
 				int or = shk.r;
 				int oc = shk.c;
 				for(int k=0; k<shk.s; k++) {
-					int nr = shk.r + dr[shk.d];
-					int nc = shk.c + dc[shk.d];
-					if(!check(nr, nc)) {
+					if(!check(shk.r+dr[shk.d], shk.c+dc[shk.d])) {
 						switch(shk.d) {
 						case 1:
 							shk.d = 2;
@@ -102,11 +106,9 @@ public class _BOJ_17143_낚시왕2 {
 							shk.d = 3;
 							break;
 						}
-						nr = shk.r + dr[shk.d];
-						nc = shk.c + dc[shk.d];
 					}
-					shk.r = nr;
-					shk.c = nc;
+					shk.r += dr[shk.d];
+					shk.c += dc[shk.d];
 				}
 				if(map[shk.r][shk.c] == -1) {
 					map[shk.r][shk.c] = j; 
@@ -120,7 +122,6 @@ public class _BOJ_17143_낚시왕2 {
 						map[shk.r][shk.c] = j; 
 					}
 				}
-				map[or][oc] = -1;
 			}
 			Collections.sort(toDel, new Comparator<Integer>() {
 				@Override

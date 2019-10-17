@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class _BOJ_1463_1로만들기 {
+public class BOJ_1463_1로만들기 {
 	static class Node{
 		int num;
 		int cnt;

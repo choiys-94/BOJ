@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class _BOJ_17471_게리맨더링_수업 {
+public class BOJ_17471_게리맨더링_수업 {
 	static int N;
 	static int[] parents;
 	static int[] p;
