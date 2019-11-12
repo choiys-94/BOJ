@@ -8,20 +8,23 @@ public class BOJ_14890_경사로_2 {
 	static int ans;
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		
-		N = sc.nextInt(); // 맵 길이
-		L = sc.nextInt(); // 경사로 길이
-		map = new int[N][N];
-		for(int i=0; i<N; i++) {
-			for(int j=0; j<N; j++) {
-				map[i][j] = sc.nextInt();
+		int T = sc.nextInt();
+		for(int tc = 1; tc <= T; tc++) {
+			N = sc.nextInt(); // 맵 길이
+			L = sc.nextInt(); // 경사로 길이
+			map = new int[N][N];
+			for(int i=0; i<N; i++) {
+				for(int j=0; j<N; j++) {
+					map[i][j] = sc.nextInt();
+				}
 			}
+			ans = 0;
+			for(int i=0; i<N; i++) {
+				row(i, 0, new boolean[N]);
+				col(0, i, new boolean[N]);
+			}
+			System.out.println("#" + tc + " " + ans);
 		}
-		for(int i=0; i<N; i++) {
-			row(i, 0, new boolean[N]);
-			col(0, i, new boolean[N]);
-		}
-		System.out.println(ans);
 	}
 	
 	static void row(int col, int row, boolean[] visited) {
